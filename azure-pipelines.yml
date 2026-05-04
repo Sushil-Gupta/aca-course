@@ -38,7 +38,7 @@ stages:
         tags: $(TAG)
 
     - task: Docker@2
-      displayName: Push image to Docker Hub
+      displayName: Push image to Docker Hub Registry
       inputs:
         containerRegistry: 'dockerhub-connection-v-sushigupta'
         repository: $(IMAGE_NAME)
