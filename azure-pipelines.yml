@@ -12,7 +12,7 @@ resources:
 - repo: self
 
 variables:
-  IMAGE_NAME: houssemdocker/album-backend-api
+  IMAGE_NAME: sushilgupta2204/album-backend-api
   CONTAINERAPPS_APP: album-backend-api
   CONTAINERAPPS_ENVIRONMENT: aca-environment
   RESOURCE_GROUP: rg-containerapps-azure-pipelines
@@ -32,14 +32,14 @@ stages:
       displayName: Build an image
       inputs:
         command: build
-        dockerfile: '$(Build.SourcesDirectory)/backend_api/backend_api_csharp/Dockerfile'
+        Dockerfile: '$(Build.SourcesDirectory)/backend_api/backend_api_csharp/Dockerfile'
         repository: $(IMAGE_NAME)
         tags: $(TAG)
 
     - task: Docker@2
       displayName: Push image to Docker Hub
       inputs:
-        containerRegistry: 'dockerhub-connection'
+        containerRegistry: 'dockerhub-connection-v-sushigupta'
         repository: $(IMAGE_NAME)
         command: 'push'
         tags: '$(TAG)'
@@ -56,7 +56,7 @@ stages:
     - task: AzureContainerApps@1
       displayName: Deploy new container version
       inputs:
-        azureSubscription: 'azure-connection'
+        azureSubscription: 'ado-contosso-subsc'
         imageToDeploy: '$(IMAGE_NAME):$(TAG)'
         containerAppName: '$(CONTAINERAPPS_APP)'
         resourceGroup: '$(RESOURCE_GROUP)'
